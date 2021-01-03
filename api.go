@@ -19,11 +19,11 @@ import (
 
 // API is an interface to a UniFi controller.
 type API struct {
-	hc         *http.Client
-	cookieBase *url.URL
-
-	as   AuthStore
-	auth *Auth
+	hc              *http.Client
+	cookieBase      *url.URL
+	checkConfigFile bool
+	as              AuthStore
+	auth            *Auth
 }
 
 // Auth holds the authentication information for accessing a UniFi controller.
@@ -177,12 +177,13 @@ type AuthStore interface {
 var DefaultAuthFile = filepath.Join(os.Getenv("HOME"), ".unifi-auth")
 
 // FileAuthStore returns an AuthStore that stores authentication information in a named file.
-func FileAuthStore(filename string) AuthStore {
-	return fileAuthStore{filename}
+func FileAuthStore(filename string, checkPerm bool) AuthStore {
+	return fileAuthStore{filename, checkPerm}
 }
 
 type fileAuthStore struct {
-	filename string
+	filename         string
+	checkPermissions bool
 }
 
 func (f fileAuthStore) Load() (*Auth, error) {
@@ -191,7 +192,7 @@ func (f fileAuthStore) Load() (*Auth, error) {
 	if err != nil {
 		return nil, err
 	}
-	if fi.Mode()&0077 != 0 {
+	if f.checkPermissions && (fi.Mode()&0077) != 0 {
 		return nil, fmt.Errorf("security check failed on %s: mode is %04o; it should not be accessible by group/other", f.filename, fi.Mode())
 	}
 
