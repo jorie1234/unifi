@@ -226,6 +226,51 @@ type Client struct {
 
 	LastSeen time.Time
 
+	SiteID           string `json:"site_id"`
+	AssocTime        int    `json:"assoc_time"`
+	LatestAssocTime  int    `json:"latest_assoc_time"`
+	Oui              string `json:"oui"`
+	UserID           string `json:"user_id"`
+	Mac              string `json:"mac"`
+	IsGuest          bool   `json:"is_guest"`
+	FirstSeen        int    `json:"first_seen"`
+	IsWired          bool   `json:"is_wired"`
+	UptimeByUap      int    `json:"_uptime_by_uap"`
+	LastSeenByUap    int    `json:"_last_seen_by_uap"`
+	IsGuestByUap     bool   `json:"_is_guest_by_uap"`
+	ApMac            string `json:"ap_mac"`
+	Channel          int    `json:"channel"`
+	Radio            string `json:"radio"`
+	RadioName        string `json:"radio_name"`
+	Essid            string `json:"essid"`
+	Bssid            string `json:"bssid"`
+	PowersaveEnabled bool   `json:"powersave_enabled"`
+	Is11R            bool   `json:"is_11r"`
+	Ccq              int    `json:"ccq"`
+	Rssi             int    `json:"rssi"`
+	Noise            int    `json:"noise"`
+	Signal           int    `json:"signal"`
+	TxRate           int    `json:"tx_rate"`
+	RxRate           int    `json:"rx_rate"`
+	TxPower          int    `json:"tx_power"`
+	Idletime         int    `json:"idletime"`
+	DhcpendTime      int    `json:"dhcpend_time"`
+	Satisfaction     int    `json:"satisfaction"`
+	Anomalies        int    `json:"anomalies"`
+	Vlan             int    `json:"vlan"`
+	RadioProto       string `json:"radio_proto"`
+	Uptime           int    `json:"uptime"`
+	TxBytes          int64  `json:"tx_bytes"`
+	RxBytes          int    `json:"rx_bytes"`
+	TxPackets        int    `json:"tx_packets"`
+	TxRetries        int    `json:"tx_retries"`
+	WifiTxAttempts   int    `json:"wifi_tx_attempts"`
+	RxPackets        int    `json:"rx_packets"`
+	BytesR           int    `json:"bytes-r"`
+	TxBytesR         int    `json:"tx_bytes-r"`
+	RxBytesR         int    `json:"rx_bytes-r"`
+	Authorized       bool   `json:"authorized"`
+	QosPolicyApplied bool   `json:"qos_policy_applied"`
 	// TODO: other fields
 }
 
